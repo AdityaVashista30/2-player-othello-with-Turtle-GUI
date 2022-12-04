@@ -1,12 +1,10 @@
 #-------------------------------------------------------------------------------
-# Name:        module2
-# Purpose:
+# Name:        othello
+# Purpose:     CS project
 #
-# Author:      vaio
+# Author:      Aditya Vashista
 #
-# Created:
-# Copyright:   (c) vaio
-# Licence:     <your licence>
+#
 #-------------------------------------------------------------------------------
 
 def main():
@@ -141,7 +139,7 @@ def draw_board(box_codes):
     write("H", font = ("OCR A Extended", 25, "bold"))
     up()
     x=-385
-    y=-310
+    y=-330
     goto(x,y)
     down()
     write("1", font = ("OCR A Extended", 25, "bold"))
@@ -194,7 +192,7 @@ def black_n_white(box_codes):
     b=0
     w=0
     for i in box_codes.values():
-        if i.value<>():
+        if i.value!=():
             if i.value=="black":
                 b+=1
             else:
@@ -219,7 +217,7 @@ def black_n_white(box_codes):
     color("snow")
     up()
     speed()
-    goto(200,-220)
+    goto(200,-240)
     down()
     write("Black Tokens= "+b, font = ("OCR A Extended", 16, "bold"))
     up()
@@ -236,7 +234,7 @@ def Rules_N_Guidelines():
     write("Rules & GUIDELINES:", font = ("OCR A Extended", 20, ("bold","underline","italic")))
     up()
     color("green2")
-    goto(160,-140)
+    goto(200,-150)
     down()
     write("""
     (1) THE OBJECTIVE OF THE
@@ -284,21 +282,21 @@ Rules_N_Guidelines()
 Diagonal_Relation1=[["A1","B2","C3","D4","E5","F6","G7","H8"],["B1","C2","D3","E4","F5","G6","H7"],["C1","D2","E3","F4","G5","H6"],["D1","E2","F3","G4","H5"],["E1","F2","G3","H4"],["A2","B3","C4","D5","E6","F7","G8"],["A3","B4","C5","D6","E7","F8"],["A4","B5","C6","D7","E8"],["A5","B6","C7","D8"]]
 Diagonal_Relation2=[["D1","C2","B3","A4"],["E1","D2","C3","B4","A5"],["F1","E2","D3","C4","B5","A6"],["G1","F2","E3","D4","C5","B6","A7"],["H1","G2","F3","E4","D5","C6","B7","A8"],["H2","G3","F4","E5","D6","C7","B8"],["H3","G4","F5","E6","D7","C8"],["H4","G5","F6","E7","D8"],["H5","G6","F7","E8"]]
 #
-print "INPUT SCREEN"
-Player1=raw_input("Enter name of Player 1: ")
-Player2=raw_input("Enter name of Player 2: ")
-print "Color of Player 1 tokens are BLACK...."
-print "Color of Player 2 tokens are WHITE...."
-print "Player 1 wil make the first move, followed by player 2!!"
+print("INPUT SCREEN")
+Player1=input("Enter name of Player 1: ")
+Player2=input("Enter name of Player 2: ")
+print("Color of Player 1 tokens are BLACK....")
+print("Color of Player 2 tokens are WHITE....")
+print("Player 1 wil make the first move, followed by player 2!!")
 #
 color("snow")
 up()
-goto(200,-160)
+goto(200,-180)
 down()
 write("Player 1: "+Player1, font = ("OCR A Extended", 16, "bold"))
 color("snow")
 up()
-goto(200,-190)
+goto(200,-200)
 down()
 write("Player 2: "+Player2, font = ("OCR A Extended", 16, "bold"))
 up()
@@ -308,10 +306,10 @@ black_n_white(box_codes)
 
 while token<65:
 #
-    if token%2<>0:
+    if token%2!=0:
         while True:
             try:
-                move=raw_input("Enter the box where Player 1 would like to place the token: ")
+                move=input("Enter the box where Player 1 would like to place the token: ")
                 if move in box_codes:
                     if box_codes[move].value==():
                         box_codes[move].value="black"
@@ -321,13 +319,13 @@ while token<65:
                 else:
                     raise Box_dont_exist
             except Box_Occupied_already:
-                print "The given box is already occupied!!! Please enter another box code..."
+                print("The given box is already occupied!!! Please enter another box code...")
             except Box_dont_exist:
-                print "The given box doesn't exist!!! Please enter valid box code...."
+                print("The given box doesn't exist!!! Please enter valid box code....")
     else:
          while True:
             try:
-                move=raw_input("Enter the box where Player 2 would like to place the token: ")
+                move=input("Enter the box where Player 2 would like to place the token: ")
                 if move in box_codes:
                     if box_codes[move].value==():
                         box_codes[move].value="snow"
@@ -337,9 +335,9 @@ while token<65:
                 else:
                     raise Box_dont_exist
             except Box_Occupied_already:
-                print "The given box is already occupied!!! Please enter another box code..."
+                print("The given box is already occupied!!! Please enter another box code...")
             except Box_dont_exist:
-                print "The given box doesn't exist!!! Please enter valid box code...."
+                print("The given box doesn't exist!!! Please enter valid box code....")
     draw_token(box_codes[move].x,box_codes[move].y,box_codes[move].value)
 #
     row_tokens_count=0
@@ -349,10 +347,10 @@ while token<65:
     for i in row:
         no_of_elements_out_8+=1
         s=move[0]+i
-        if box_codes[s].value<>box_codes[move].value:
+        if box_codes[s].value!=box_codes[move].value:
             if row_tokens_count<4:
                 row_tokens_count=0
-            if box_codes[s].value<>():
+            if box_codes[s].value!=():
                 if c_none==0 :
                     row_elements_to_be_changed.append(s)
             elif box_codes[s].value==():
@@ -379,10 +377,10 @@ while token<65:
     for j in column:
         no_of_elements_out_8+=1
         s=j+move[1]
-        if box_codes[s].value<>box_codes[move].value:
+        if box_codes[s].value!=box_codes[move].value:
             if column_tokens_count<4:
                 column_tokens_count=0
-            if box_codes[s].value<>():
+            if box_codes[s].value!=():
                 if c_none==0 :
                     column_elements_to_be_changed.append(s)
             elif box_codes[s].value==():
@@ -409,10 +407,10 @@ while token<65:
         if move in digonal1:
             for s in digonal1:
                 no_of_elements_out_8+=1
-                if box_codes[s].value<>box_codes[move].value:
+                if box_codes[s].value!=box_codes[move].value:
                     if diagonal_tokens_count<4:
                         diagonal_tokens_count=0
-                    if box_codes[s].value<>():
+                    if box_codes[s].value!=():
                         if c_none==0 :
                             diagonal_elements_to_be_changed.append(s)
                     elif box_codes[s].value==():
@@ -439,10 +437,10 @@ while token<65:
         if move in digonal2:
             for s in digonal2:
                 no_of_elements_out_8+=1
-                if box_codes[s].value<>box_codes[move].value:
+                if box_codes[s].value!=box_codes[move].value:
                     if diagonal_tokens_count<4:
                         diagonal_tokens_count=0
-                    if box_codes[s].value<>():
+                    if box_codes[s].value!=():
                         if c_none==0 :
                             diagonal_elements_to_be_changed.append(s)
                     elif box_codes[s].value==():
@@ -468,7 +466,7 @@ Winner_Sound()
 b=0
 w=0
 for i in box_codes.values():
-    if i.value<>():
+    if i.value!=():
         if i.value=="black":
             b+=1
         else:
