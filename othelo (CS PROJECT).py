@@ -3,8 +3,6 @@
 # Purpose:     CS project
 #
 # Author:      Aditya Vashista
-#
-#
 #-------------------------------------------------------------------------------
 
 def main():
@@ -17,6 +15,8 @@ import turtle,os
 from time import sleep
 import winsound
 from turtle import *
+from datetime import datetime
+
 title("THE GAME OF OTHELLO")
 setup(1000,625)
 turtle.pen(fillcolor="black", pencolor="red", pensize=3)
@@ -254,9 +254,19 @@ def Rules_N_Guidelines():
     COLOR INTO THAT OF THE COLOUR OF
     THE SERIES.
     (4) Players take alternate turns.
-    EACH PLAYER GETS 32 CHANCES""", font = ("OCR A Extended", 15, ("bold","italic")))
+    EACH PLAYER GETS 30 CHANCES""", font = ("OCR A Extended", 15, ("bold","italic")))
     up()
 
+
+file=open("C:\\Users\\nxf69327\\Desktop\\players.txt","r")
+previous_plays=file.readlines()
+print("Winner \t Losser \t Time")
+for i in previous_plays:
+    print(i)
+
+
+time_start=datetime.now()
+print("Start Time: ",time_start)
 #
 box_codes={}
 row=["1","2","3","4","5","6","7","8"]
@@ -304,7 +314,7 @@ up()
 token=1
 black_n_white(box_codes)
 
-while token<65:
+while token<61:
 #
     if token%2!=0:
         while True:
@@ -476,14 +486,25 @@ speed()
 goto(180,-300)
 color("turquoise1")
 down()
+
+time_end=datetime.now()
+print("End Time: ",time_end)
+time_difference=(time_end-time_start).total_seconds
+
+winner,losser="",""
 if b>w:
     write("WINNER: "+Player1, font = ("OCR A Extended", 30, ("bold","italic","underline")))
+    winner,losser=Player1,Player2
 elif w>b:
     write("WINNER: "+Player2, font = ("OCR A Extended", 30, ("bold","italic","underline")))
+    winner,losser=Player2,Player1
 else:
     write("DRAW", font = ("OCR A Extended", 30, ("bold","italic","underline")))
 
 Winner_Sound()
-
+file=open("C:\\Users\\nxf69327\\Desktop\\players.txt","a")
+file_input=winner+"\t"+losser+"\t"+str(time_difference)
+file.write(file_input)
+file.close()
 os.system("pause")
 mainloop()
